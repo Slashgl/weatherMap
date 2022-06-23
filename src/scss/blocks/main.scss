@@ -1,0 +1,355 @@
+.weather {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  background: url("../img/background.png") no-repeat;
+  &__header {
+    margin: 82px 0 0 0;
+    text-align: center;
+  }
+  &__city {
+    font-weight: 400;
+    font-size: 37px;
+    color: #FFFFFF;
+  }
+  &__degrees {
+    font-weight: 200;
+    font-size: 102px;
+    color: #FFFFFF;
+  }
+  &__description {
+    font-weight: 400;
+    font-size: 24px;
+    color: #FFFFFF;
+  }
+  &__coordinates {
+    font-weight: 500;
+    font-size: 21px;
+    color: #FFFFFF;
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__footer {
+    display: flex;
+    margin: 37px 0 0 20px;
+  }
+
+  &__left {
+    width: 535px;
+    height: 706px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(290px);
+    border-radius: 15px;
+    margin: 0;
+  }
+  &__left-subheader {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #424242;
+    text-align: center;
+    margin-top: 14px;
+  }
+  &__item {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin: 34px 17px 10px 15px;
+    &:after {
+      content: '';
+      position: absolute;
+      top: 35px;
+      width: 503px;
+      height: 1px;
+      background: #424242;
+      opacity: 0.5;
+    }
+  }
+  &__weeks {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 92px;
+  }
+  &__week {
+    font-weight: 500;
+    font-size: 22px;
+  }
+  &__graph {
+    display: flex;
+    align-items: center;
+  }
+  &__graphOfDegrees {
+    display: flex;
+    justify-content: space-between;
+    width: 290px;
+    &_degree {
+      font-weight: 500;
+      font-size: 22px;
+    }
+  }
+
+  &__right {
+    display: flex;
+    flex-direction: column;
+    margin-left: 37px;
+  }
+  &__time {
+    position: relative;
+    padding: 10px 0 0 10px;
+    width: 628px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(290px);
+    border-radius: 15px;
+    &_subheader {
+      width: 300px;
+      font-weight: 400;
+      font-size: 18px;
+      color: #373C42;
+      &:before {
+        content: '';
+        position: absolute;
+        top: 60px;
+        width: 608px;
+        height: 0.2px;
+        background: #373C42;
+        opacity: 0.5;
+      }
+    }
+  }
+
+  &__frames {
+    display: flex;
+    justify-content: space-between;
+    width: 603px;
+    min-height: 122px;
+    margin-top: 16px;
+  }
+  &__frame {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    list-style: none;
+    &_degrees {
+      font-weight: 500;
+      font-size: 22px;
+      color: #373C42;
+    }
+    &_time {
+      font-weight: 500;
+      font-size: 17px;
+      color: #373C42;
+    }
+  }
+  &__boards {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 628px;
+    height: 453px;
+    margin-top: 53px;
+
+  }
+  &__board {
+    padding: 15px 0 0 10px;
+    &:nth-child(2) {
+      padding: 0;
+    }
+  }
+  &__wrapper {
+    display: flex;
+    margin-left: 10px;
+  }
+  &__sunrise {
+    padding: 15px 0 0 20px;
+    display: flex;
+  }
+  &__tab {
+    font-weight: 500;
+    font-size: 18.5045px;
+    line-height: 22px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #000000;
+    opacity: 0.3;
+    margin-left: 5px;
+  }
+  &__inner {
+    margin: 5px 0 0 10px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 140px;
+    justify-content: space-between;
+
+    img {
+      width: 100%;
+      height: 100%;
+      padding-right: 10px;
+    }
+    &_index {
+      font-weight: 400;
+      font-size: 44.4108px;
+      color: #3C3C3C;
+    }
+    &_level {
+      font-weight: 500;
+      font-size: 27.14px;
+      color: #3C3C3C;
+    }
+    &_info {
+      width: 166.92px;
+      height: 48.61px;
+      font-weight: 400;
+      font-size: 22px;
+      color: #3C3C3C;
+    }
+    &_time {
+      font-weight: 400;
+      font-size: 43px;
+      color: #000000;
+    }
+    &_time-span {
+      font-weight: 400;
+      font-size: 35px;
+      color: #000000;
+    }
+    &_sunrise-span {
+      font-weight: 400;
+      font-size: 18px;
+      color: #000000;
+    }
+    &_sunrise {
+      font-weight: 400;
+      font-size: 22px;
+      color: #000000;
+      padding: 15px 0 0 20px;
+    }
+    &_graph {
+    }
+    &_degrees {
+      font-weight: 400;
+      font-size: 35px;
+      color: #000000;
+    }
+    &_humidity {
+      font-weight: 400;
+      font-size: 35px;
+      color: #000000;
+    }
+    &_eye {
+      font-weight: 400;
+      font-size: 43.1772px;
+      color: #000000;
+    }
+    &_eye-span {
+      font-size: 35px;
+    }
+  }
+
+  &__board {
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 0.616817px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(290px);
+    border-radius: 18.5045px;
+    margin-bottom: 53px;
+  }
+}
+
+
+.sidebar {
+  background: rgba(0, 148, 255, 0.15);
+  backdrop-filter: blur(340px);
+  width: 661px;
+  &__input {
+    input {
+      font-weight: 400;
+      font-size: 17px;
+      margin-top:26px;
+      margin-left:20px;
+      padding-left: 46px;
+      width: 621px;
+      height: 44px;
+      background: #FFFFFF;
+      border-radius: 47px;
+      outline: none;
+      border: none;
+
+    }
+    &:before {
+      content: url("../img/Vector.svg");
+      position: absolute;
+      left: 39px;
+      top: 40px;
+    }
+  }
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+  }
+  &__item {
+    display: flex;
+    cursor: pointer;
+    justify-content: space-between;
+    width: 621px;
+    min-height: 200px;
+    background-image: url("../img/card1.png");
+    background-size: cover;
+    border-radius: 14px;
+    margin-left: 20px;
+    margin-bottom: 30px;
+    &:nth-child(2) {
+      background-image: url("../img/card.png");
+      border-radius: 14px;
+    }
+  }
+  &__left {
+    margin: 20px;
+
+  }
+  &__right {
+    margin: 20px;
+  }
+  &__subheader {
+    font-weight: 700;
+    font-size: 32px;
+    color: #FFFFFF;
+    margin-bottom: 5px;
+  }
+  &__city {
+    font-weight: 400;
+    font-size: 21px;
+    color: #FFFFFF;
+  }
+  &__description {
+    margin-top: 59px;
+    font-weight: 400;
+    font-size: 21px;
+    color: #FFFFFF;
+    width: 256px;
+  }
+  &__degrees {
+    font-weight: 300;
+    font-size: 110px;
+    color: #FFFFFF;
+  }
+  &__coordinate {
+    font-weight: 500;
+    font-size: 21px;
+    color: #FFFFFF;
+  }
+  &__time {
+    font-weight: 400;
+    font-size: 21px;
+    color: #FFFFFF;
+  }
+}

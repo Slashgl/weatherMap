@@ -1,0 +1,58 @@
+@import "blocks/main.scss";
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../fonts/SFProDisplay-Ultralight.eot');
+  src: url('../fonts/SFProDisplay-Ultralight.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/SFProDisplay-Ultralight.woff') format('woff'),
+  url('../fonts/SFProDisplay-Ultralight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../fonts/SFProDisplay-Light.eot');
+  src: url('../fonts/SFProDisplay-Light.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/SFProDisplay-Light.woff') format('woff'),
+  url('../fonts/SFProDisplay-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../fonts/SFPRODISPLAYREGULAR.eot');
+  src: url('../fonts/SFPRODISPLAYREGULAR.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/SFPRODISPLAYREGULAR.woff') format('woff'),
+  url('../fonts/SFPRODISPLAYREGULAR.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../fonts/SFPRODISPLAYMEDIUM.eot');
+  src: url('../fonts/SFPRODISPLAYMEDIUM.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/SFPRODISPLAYMEDIUM.woff') format('woff'),
+  url('../fonts/SFPRODISPLAYMEDIUM.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../fonts/SFPRODISPLAYBOLD.eot');
+  src: url('../fonts/SFPRODISPLAYBOLD.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/SFPRODISPLAYBOLD.woff') format('woff'),
+  url('../fonts/SFPRODISPLAYBOLD.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+* {
+  font-family: 'SF Pro Display', serif;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+
+}

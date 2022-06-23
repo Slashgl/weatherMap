@@ -1,0 +1,22 @@
+@mixin before_circle {
+  &::before {
+    content: '';
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background: #FF3E79;
+  }
+}
+@mixin line {
+  &::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 32px;
+    background: #EAEAEA;
+    border-radius: 1px;
+  }
+}
