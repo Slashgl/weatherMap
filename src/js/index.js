@@ -4,7 +4,6 @@ function getData(link) {
   fetch(link)
     .then(res => res.json())
     .then(res => {
-      console.log(res)
       render(res)
     })
 
@@ -19,7 +18,7 @@ function geoFindMe() {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
 
-      myLocationLink.href = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+      myLocationLink.href = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
 
     getData(myLocationLink)
   }
@@ -36,38 +35,49 @@ function geoFindMe() {
 }
 
 function render(api) {
-  document.querySelectorAll('.city').forEach(el => el.innerHTML = api.city.name);
-  document.querySelectorAll('.coords').forEach(el => el.innerHTML = `H:${Math.round(api.city.coord.lat)}&deg L:${Math.round(api.city.coord.lon)}&deg`);
-  document.querySelector('.time').innerHTML = `${new Date().toLocaleTimeString('ru-RU', {})}`
-  api.list.map(weatherInfo => {
-    console.log(weatherInfo)
-    document.querySelectorAll('.min').forEach(el => el.innerHTML = `${weatherInfo.main.temp_min}`)
+  let weatherWeek = document.querySelectorAll('.weather__week');
+  let minDegrees = document.querySelectorAll('.min');
+  const weeks = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat','Sun', 'Mon'];
+
+  for(let i = 0; i < weeks.length; i++) {
+    weatherWeek[i].innerHTML = weeks[i]
+  }
+
+  console.log(api.daily)
+  document.querySelector('.coords').innerHTML = `H:${Math.round(api.lat)}&deg L:${Math.round(api.lon)}&deg`
+
+  const arr = [];
+  api.daily.forEach(day => {
+
+    arr.push(Math.floor(day.temp.min))
   })
+  for(let i = 0; i < arr.length; i++) {
+    minDegrees[i].innerHTML = arr[i]
+  }
+
 }
+
+
 
 function createList() {
   const ul = document.querySelector('.weather__list');
 
-  for(let i = 0; i < 10; i++) {
-    const li = document.createElement('li');
-    li.classList.add('weather__item');
-
-    li.innerHTML = `
+  for (let i = 0; i < 8; i++) {
+      const li = document.createElement('li');
+      li.classList.add('weather__item');
+      li.innerHTML = `
       <div class="weather__weeks">
-        <div class="weather__week">Mon</div>
+        <div class="weather__week"></div>
         <div class="icon"></div>
-       </div>
-      <div class="weather__graphOfDegrees">
-        <div class="weather__graphOfDegrees_degree min">18°</div>
-        <div class="weather__graph"><img src="src/img/Rectangle.svg" alt="graph"></div>
-        <div class="weather__graphOfDegrees_degree max">18°</div>
       </div>
-    `
-
-    ul.appendChild(li);
-    console.log(ul)
+      <div class="weather__graphOfDegrees">
+        <div class="weather__graphOfDegrees_degree min"></div>
+        <div class="weather__graph"><img src="src/img/Rectangle.svg" alt="graph"></div>
+      <div class="weather__graphOfDegrees_degree max">18°</div>
+  </div>
+      `
+      ul.appendChild(li);
   }
-
 }
 createList()
 
