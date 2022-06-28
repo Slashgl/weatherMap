@@ -4,6 +4,7 @@ function getData(link) {
   fetch(link)
     .then(res => res.json())
     .then(res => {
+      console.log(res)
       render(res)
     })
 
@@ -35,46 +36,27 @@ function geoFindMe() {
 }
 
 function render(api) {
-  let weatherWeek = document.querySelectorAll('.weather__week');
-  let minDegrees = document.querySelectorAll('.min');
-  const weeks = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat','Sun', 'Mon'];
-
-  for(let i = 0; i < weeks.length; i++) {
-    weatherWeek[i].innerHTML = weeks[i]
-  }
-
-  console.log(api.daily)
-  document.querySelector('.coords').innerHTML = `H:${Math.round(api.lat)}&deg L:${Math.round(api.lon)}&deg`
-
-  const arr = [];
-  api.daily.forEach(day => {
-
-    arr.push(Math.floor(day.temp.min))
+  returnArray(api.daily).forEach((day) => {
+    console.log(day)
   })
-  for(let i = 0; i < arr.length; i++) {
-    minDegrees[i].innerHTML = arr[i]
-  }
-
 }
 
-
+function returnArray(arr) {
+  return arr.map( day => {
+    return [day.dt, day.temp.min, day.temp.max]
+  })
+}
 
 function createList() {
   const ul = document.querySelector('.weather__list');
 
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 9; i++) {
       const li = document.createElement('li');
       li.classList.add('weather__item');
       li.innerHTML = `
-      <div class="weather__weeks">
-        <div class="weather__week"></div>
-        <div class="icon"></div>
-      </div>
-      <div class="weather__graphOfDegrees">
-        <div class="weather__graphOfDegrees_degree min"></div>
-        <div class="weather__graph"><img src="src/img/Rectangle.svg" alt="graph"></div>
-      <div class="weather__graphOfDegrees_degree max">18°</div>
-  </div>
+        <div class="weather__dt"></div>
+        <div class="weather__degrees-min"></div>
+        <div class="weather__degrees_max"></div>
       `
       ul.appendChild(li);
   }
