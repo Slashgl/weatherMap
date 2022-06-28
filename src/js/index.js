@@ -13,17 +13,6 @@ function getData(link) {
 
 }
 
-  // input.onkeyup = debounce(({target}) =>
-  //     fetch(`https://api.openweathermap.org/data/2.5/onecall?appid=${apiKey}`)
-  //       .then((res) => res.json())
-  //       .then(res => {
-  //         console.log(res)
-  //
-  //       }),
-  //   500
-  // )
-
-
 function geoFindMe() {
   const myLocationLink = document.querySelector('.linkMyLocation')
 
@@ -87,7 +76,6 @@ const getAnHour = timestamp => {
   const time = new Date();
   time.setTime(timestamp + '000');
   const timeNumber = time.getHours();
-  console.log(daysName[timeNumber])
   return daysName[timeNumber]
 }
 
@@ -129,6 +117,7 @@ function createListDayTemp(day) {
     `;
   return li;
 }
+
 function  createListHourlyTemp(hourly) {
   const li = document.createElement('li');
   li.classList.add('weather__frame');
