@@ -29,56 +29,7 @@
           <h2 class="weather__time_subheader">Cloudy conditions from 1AM-9AM, with
             showers expected at 9AM.</h2>
           <ul class="weather__frames">
-            <li class="weather__frame">
-              <div class="weather__frame_time">Now</div>
-              <div class="icon"></div>
-              <div class="weather__frame_degrees average-daily-temperature">21°</div>
-            </li>
-            <li class="weather__frame">
-              <div class="weather__frame_time">10AM</div>
-              <div class="icon"></div>
-              <div class="weather__frame_degrees average-daily-temperature">21°</div>
-            </li>
-            <li class="weather__frame">
-              <div class="weather__frame_time">11AM</div>
-              <div class="icon"></div>
-              <div class="weather__frame_degrees average-daily-temperature">21°</div>
-            </li>
-            <li class="weather__frame">
-              <div class="weather__frame_time">12AM</div>
-              <div class="icon"></div>
-              <div class="weather__frame_degrees average-daily-temperature">21°</div>
-            </li>
-            <li class="weather__frame">
-              <div class="weather__frame_time">1PM</div>
-              <div class="icon"></div>
-              <div class="weather__frame_degrees average-daily-temperature">21°</div>
-            </li>
-            <li class="weather__frame">
-              <div class="weather__frame_time">2PM</div>
-              <div class="icon"></div>
-              <div class="weather__frame_degrees average-daily-temperature">21°</div>
-            </li>
-            <li class="weather__frame">
-              <div class="weather__frame_time">3PM</div>
-              <div class="icon"></div>
-              <div class="weather__frame_degrees average-daily-temperature">21°</div>
-            </li>
-            <li class="weather__frame">
-              <div class="weather__frame_time">4PM</div>
-              <div class="icon"></div>
-              <div class="weather__frame_degrees average-daily-temperature">21°</div>
-            </li>
-            <li class="weather__frame">
-              <div class="weather__frame_time">5PM</div>
-              <div class="icon"></div>
-              <div class="weather__frame_degrees average-daily-temperature">21°</div>
-            </li>
-            <li class="weather__frame">
-              <div class="weather__frame_time">6PM</div>
-              <div class="icon"></div>
-              <div class="weather__frame_degrees average-daily-temperature">21°</div>
-            </li>
+
           </ul>
         </div>
         <div class="weather__boards">
@@ -102,10 +53,11 @@
               <div class="weather__tab">sunrise</div>
             </div>
             <div class="weather__inner">
-              <div class="weather__inner_time time">
-                11:28
-                <span class="weather__inner_time-span">AM</span>
+              <div class="weather__timeNow">
+                <span class="weather__time-now">01:38</span>
+                <span class="weather__format">AM</span>
               </div>
+
               <div class="weather__graph">
                 <img src="img/board/Vector.svg" alt="Vector">
               </div>
@@ -161,9 +113,9 @@
   </div>
   <div class="sidebar">
     <label class="sidebar__input">
-      <input type='text' placeholder="Search for a city or airport">
+      <input class="input" type='text' placeholder="Search for a city or airport">
     </label>
-      <a class="sidebar__item linkMyLocation" target="_blank">
+      <a class="sidebar__item linkMyLocation">
         <div class="sidebar__left">
           <div class="sidebar__subheader">My location</div>
           <div class="sidebar__city city">Minsk</div>
@@ -187,7 +139,17 @@
         </div>
       </a>
   </div>
+  <div class="popup">
+    <div class="popup__content ">
+      <label>
+        <input class="popup__search" type="text">
+      </label>
+      <ul class="popup__results"></ul>
+      <button type="button" class="popup__button">OK</button>
+    </div>
+  </div>
 </section>
 </body>
 </html>
+
 

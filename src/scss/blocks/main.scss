@@ -5,7 +5,7 @@
   height: 100%;
   background: url("../img/background.png") no-repeat;
   &__header {
-    margin: 82px 0 0 0;
+    margin: 59px 0 0 0;
     text-align: center;
   }
   &__city {
@@ -36,12 +36,12 @@
 
   &__footer {
     display: flex;
-    margin: 37px 0 0 20px;
+    margin: 20px 0 0 20px;
   }
 
   &__left {
     width: 535px;
-    min-height: 706px;
+    height: 630px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(290px);
     border-radius: 15px;
@@ -71,28 +71,35 @@
       opacity: 0.5;
     }
   }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
   &__weeks {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 92px;
+    height: 55px;
+    .weather__dt {
+      margin-right: 10px;
+    }
+    .icon {
+      width: 55px;
+      height: 55px;
+    }
   }
-  &__week {
-    font-weight: 500;
-    font-size: 22px;
-  }
-  &__graph {
-    display: flex;
-    align-items: center;
-  }
-  &__graphOfDegrees {
+  &__graphDegress {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 290px;
-    &_degree {
-      font-weight: 500;
-      font-size: 22px;
+    width: 273px;
+    .weather__lineGraph {
+      width: 164.92px;
+      height: 4px;
+      background: #000000;
+      opacity: 0.51;
+      border-radius: 44px;
     }
   }
 
@@ -149,15 +156,18 @@
       font-size: 17px;
       color: #373C42;
     }
+    img {
+      width: 55px;
+      height: 55px;
+    }
   }
   &__boards {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     width: 628px;
-    height: 453px;
-    margin-top: 53px;
-
+    height: 450px;
+    margin-top: 20px;
   }
   &__board {
     padding: 15px 0 0 10px;
@@ -184,13 +194,12 @@
     margin-left: 5px;
   }
   &__inner {
-    margin: 5px 0 0 10px;
-    padding: 0;
     display: flex;
     flex-direction: column;
-    height: 140px;
     justify-content: space-between;
-
+    margin: 5px 0 0 10px;
+    padding: 0;
+    height: 140px;
     img {
       width: 100%;
       height: 100%;
@@ -264,7 +273,14 @@
     border: 0.616817px solid rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(290px);
     border-radius: 18.5045px;
-    margin-bottom: 53px;
+  }
+  &__timeNow {
+    font-weight: 400;
+    font-size: 43px;
+    .weather__format {
+      font-weight: 400;
+      font-size: 30px;
+    }
   }
 }
 
@@ -272,7 +288,6 @@
 .sidebar {
   background: rgba(0, 148, 255, 0.15);
   backdrop-filter: blur(340px);
-  width: 661px;
   &__input {
     input {
       font-weight: 400;
@@ -360,11 +375,50 @@
 
   }
 }
-
-
-.icon {
-  img {
-    width: 50px;
-    height: 50px;
+.popup {
+  visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background: rgba(78, 112, 123, 0.42);
+  backdrop-filter: blur(16px);
+  &__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 621px;
+    height: 289px;
+  }
+  &__search {
+    width: 621px;
+    height: 44px;
+    background: #F3F3F3;
+    border-radius: 16px 16px 0 0;
+    border: none;
+    outline: none;
+  }
+  &__results {
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF;
+    border-radius: 0 0 16px 16px;
+  }
+  &__button {
+    cursor: pointer;
+    width: 621px;
+    height: 41px;
+    background: #ABBFCE;
+    border-radius: 31px;
+    margin-top: 40px;
+    border: none;
+    &:hover {
+      background: #3AA9FF;
+    }
   }
 }
+.active {
+  visibility: visible;
+}
+
+
