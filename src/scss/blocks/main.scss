@@ -313,20 +313,13 @@
   &__item {
     display: flex;
     justify-content: space-between;
-    width: 621px;
-    min-height: 200px;
     background-image: url("../img/card1.png");
+    margin: 30px 30px;
     background-size: cover;
     border-radius: 14px;
-    margin-left: 20px;
-    margin-bottom: 30px;
-    margin-top: 30px;
     border: none;
     text-decoration: none;
-    &:nth-child(2) {
-      background-image: url("../img/card.png");
-      border-radius: 14px;
-    }
+
   }
   &__left {
     margin: 20px;
@@ -374,6 +367,16 @@
     text-align: left;
 
   }
+  &__item-city {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 30px;
+    background: url("../img/card.png");
+    background-size: cover;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+  }
 }
 .popup {
   visibility: hidden;
@@ -382,6 +385,29 @@
   height: 100vh;
   background: rgba(78, 112, 123, 0.42);
   backdrop-filter: blur(16px);
+  &__close {
+    cursor: pointer;
+    &:after {
+      content: '';
+      position: absolute;
+      right: -30px;
+      top: -15px;
+      width: 30px;
+      height: 2px;
+      background-color: #FFFFFF;
+      transform: rotate(45deg);
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      right: -30px;
+      top: -15px;
+      width: 30px;
+      height: 2px;
+      background-color: #FFFFFF;
+      transform: rotate(135deg);
+    }
+  }
   &__content {
     position: absolute;
     top: 50%;
@@ -397,12 +423,45 @@
     border-radius: 16px 16px 0 0;
     border: none;
     outline: none;
+    padding-left: 46px;
+    font-weight: 400;
+    font-size: 17px;
+  }
+  &__input {
+    &:before {
+      content: url("../img/Vector.svg");
+      position: absolute;
+      top: 13px;
+      left: 18px;
+    }
   }
   &__results {
     width: 100%;
     height: 100%;
     background: #FFFFFF;
     border-radius: 0 0 16px 16px;
+    padding: 17px 17px;
+  }
+  &__item {
+    margin-bottom: 16px;
+    cursor: pointer;
+    &:after {
+      content: '';
+      position: absolute;
+      width: 589px;
+      height: 0;
+      border: 1px solid rgba(84, 84, 88, 0.65);
+    }
+  }
+  &__name {
+    font-weight: 400;
+    font-size: 16px;
+    color: #000000;
+  }
+  &__country {
+    font-weight: 400;
+    font-size: 15px;
+    color: rgba(60, 60, 67, 0.6);
   }
   &__button {
     cursor: pointer;

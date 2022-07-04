@@ -14,23 +14,19 @@
       <div class="weather__city city">Minsk</div>
       <div class="weather__degrees degrees">21°</div>
       <div class="weather__description description">Partly Cloudy</div>
-      <div class="weather__coordinates coords">H:29°  L:15°</div>
+      <div class="weather__coordinates coords">H:29° L:15°</div>
     </div>
     <div class="weather__footer">
       <div class="weather__left">
-        <div class="weather__left-subheader">10-DAY  FORECAST</div>
-        <ul class="weather__list">
-
-        </ul>
+        <div class="weather__left-subheader">10-DAY FORECAST</div>
+        <ul class="weather__list"></ul>
       </div>
 
       <div class="weather__right">
         <div class="weather__time">
           <h2 class="weather__time_subheader">Cloudy conditions from 1AM-9AM, with
             showers expected at 9AM.</h2>
-          <ul class="weather__frames">
-
-          </ul>
+          <ul class="weather__frames"></ul>
         </div>
         <div class="weather__boards">
           <div class="weather__board">
@@ -55,7 +51,6 @@
             <div class="weather__inner">
               <div class="weather__timeNow">
                 <span class="weather__time-now">01:38</span>
-                <span class="weather__format">AM</span>
               </div>
 
               <div class="weather__graph">
@@ -94,7 +89,8 @@
             <div class="weather__inner">
               <div class="weather__inner_humidity humidity">54%</div>
               <div class="weather__inner_info">The dew point is
-                21° right now.</div>
+                21° right now.
+              </div>
             </div>
           </div>
           <div class="weather__board">
@@ -115,33 +111,26 @@
     <label class="sidebar__input">
       <input class="input" type='text' placeholder="Search for a city or airport">
     </label>
-      <a class="sidebar__item linkMyLocation">
-        <div class="sidebar__left">
-          <div class="sidebar__subheader">My location</div>
-          <div class="sidebar__city city">Minsk</div>
-          <div class="sidebar__description description">Partly Cloudy</div>
-        </div>
-        <div class="sidebar__right">
-          <div class="sidebar__degrees degrees">21°</div>
-          <div class="sidebar__coordinate coords">H:29°  L:15°</div>
-        </div>
-      </a>
-      <a class="sidebar__item">
-        <div class="sidebar__left">
-          <div class="sidebar__subheader">Kiev</div>
-          <div class="sidebar__time">12:28 AM</div>
-          <div class="sidebar__description">Not as warm tomorrow, with
-            a high of 26°</div>
-        </div>
-        <div class="sidebar__right">
-          <div class="sidebar__degrees">18°</div>
-          <div class="sidebar__coordinate">H:29°  L:15°</div>
-        </div>
-      </a>
+    <a class="sidebar__item linkMyLocation">
+      <div class="sidebar__left">
+        <div class="sidebar__subheader">My location</div>
+        <div class="sidebar__city city">Minsk</div>
+        <div class="sidebar__description">Partly Cloudy</div>
+      </div>
+      <div class="sidebar__right">
+        <div class="sidebar__degrees">21°</div>
+        <div class="sidebar__coordinate">H:29° L:15°</div>
+      </div>
+    </a>
+    <ul class="sidebar__list-city">
+
+    </ul>
   </div>
   <div class="popup">
+
     <div class="popup__content ">
-      <label>
+      <div class="popup__close"></div>
+      <label class="popup__input">
         <input class="popup__search" type="text">
       </label>
       <ul class="popup__results"></ul>
@@ -151,5 +140,4 @@
 </section>
 </body>
 </html>
-
 
