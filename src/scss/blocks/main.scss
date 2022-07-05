@@ -1,7 +1,6 @@
 .weather {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   background: url("../img/background.png") no-repeat;
   &__header {
@@ -95,10 +94,17 @@
     align-items: center;
     width: 273px;
     .weather__lineGraph {
+      position: relative;
       width: 164.92px;
       height: 4px;
       background: #000000;
       opacity: 0.51;
+      border-radius: 44px;
+    }
+    .weather__range {
+      position: absolute;
+      height: 4px;
+      background: linear-gradient(90deg, #96D0A8 0%, #B5CF79 22.81%, #F8D74A 54.18%, #EF8835 99%);
       border-radius: 44px;
     }
   }
@@ -244,8 +250,7 @@
       color: #000000;
       padding: 15px 0 0 10px;
     }
-    &_graph {
-    }
+
     &_degrees {
       font-weight: 400;
       font-size: 35px;
@@ -288,6 +293,7 @@
 .sidebar {
   background: rgba(0, 148, 255, 0.15);
   backdrop-filter: blur(340px);
+  margin-left: auto;
   &__input {
     input {
       font-weight: 400;
@@ -443,6 +449,7 @@
     padding: 17px 17px;
   }
   &__item {
+    position: relative;
     margin-bottom: 16px;
     cursor: pointer;
     &:after {
@@ -474,6 +481,12 @@
     &:hover {
       background: #3AA9FF;
     }
+  }
+  &__checked {
+    content: url("../img/Vectorchecked.svg");
+    position: absolute;
+    right: 0;
+    top: 10px;
   }
 }
 .active {

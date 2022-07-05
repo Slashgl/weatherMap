@@ -63,11 +63,11 @@ function render(api) {
   document.querySelector('.humidity').innerHTML = `${Math.round(api.current.humidity)}%`
   document.querySelector('.visibility').innerHTML = `${api.current.visibility / 1000} км`
 
-  daysTemp.forEach(day => {
-    const listItem = createListDayTemp(day);
+  daysTemp.forEach((day, _, arr) => {
+    const listItem = createListDayTemp(day, arr);
     ulDayTemp.append(listItem);
   });
-  hourlyTemp.forEach((hour) => {
+  hourlyTemp.forEach(hour => {
     hourlyTemp[0].hour = 'Now';
     const listItem = createListHourlyTemp(hour)
     ulHourlyTemp.append(listItem)
@@ -120,7 +120,9 @@ function createListDayTemp(day) {
     </div>
     <div class="weather__graphDegress">
       <div class="weather__degrees-min">${day.minT}&deg</div>
-      <div class="weather__lineGraph"></div>
+      <div class="weather__lineGraph">
+        <span class="weather__range" style="left: ${30 + day.minT}px; width: ${30 + day.maxT}px"></span>
+      </div>
       <div class="weather__degrees_max">${day.maxT}&deg</div>
     </div>
     `;
@@ -164,28 +166,24 @@ function addingListResult(api) {
 }
 
 function getCity(tag, api) {
-  tag.forEach(item => {
-    item.addEventListener('click', (e) => {
-
-      const target = e.target.parentElement;
-      const ind = Array.prototype.indexOf.call(target.children, e.target)
-
-      item.classList.add('checked');
-      if (item.classList.contains('checked')) {
-        popupBtn.addEventListener('click', (e) => {
-          api.map((item, index) => {
-            if (index === ind) {
-              fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${item.lat}&lon=${item.lon}&appid=${apiKey}&units=metric`)
-                .then(res => res.json())
-                .then(res => {
-                  createCardCityToAside(res)
-                  return res
-                })
-                .then(res => getCoordsCityFromInput(res))
-            }
-          })
+  tag.forEach((item, i) => {
+    item.addEventListener('click', () => {
+      const checked = document.createElement('span');
+      checked.classList.add('popup__checked');
+      item.append(checked)
+      popupBtn.addEventListener('click', () => {
+        api.map((item, index) => {
+          if (i === index) {
+            fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${item.lat}&lon=${item.lon}&appid=${apiKey}&units=metric`)
+              .then(res => res.json())
+              .then(res => {
+                createCardCityToAside(res)
+                return res
+              })
+              .then(res => getCoordsCityFromInput(res))
+          }
         })
-      }
+      })
     })
   })
 }
@@ -193,7 +191,7 @@ function getCity(tag, api) {
 function getCoordsCityFromInput(api) {
   const items = document.querySelectorAll('.sidebar__list-city');
   items.forEach(el => {
-    el.addEventListener('click', (e) => {
+    el.addEventListener('click', () => {
       fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${api.lat}&lon=${api.lon}&appid=${apiKey}&units=metric`)
         .then(res => res.json())
         .then(res => {
@@ -239,11 +237,11 @@ function translationFromUnixToTime(timestamp) {
 
 function translationFromNowToTime() {
   const time = new Date().toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'})
-  const hour = time.slice(0, 2);
-  if (hour == 12 && hour >= 1 && hour <= 12) {
-    return `${Number(hour) + time.slice(2)} AM`
+  const hour = Number(time.slice(0, 2));
+  if (hour === 12 && hour >= 1 && hour <= 12) {
+    return `${hour + time.slice(2)} AM`
   }
-  return `${(Number(hour) + time.slice(2))} PM`
+  return `${hour + time.slice(2)} PM`
 }
 
 function clearData() {
