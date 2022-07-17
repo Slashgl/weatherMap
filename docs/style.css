@@ -326,6 +326,13 @@
 .sidebar__right {
   margin: 20px;
 }
+.sidebar__localHeader {
+  font-weight: 700;
+  font-size: 32px;
+  color: #FFFFFF;
+  margin-bottom: 5px;
+  text-align: left;
+}
 .sidebar__subheader {
   font-weight: 700;
   font-size: 32px;
