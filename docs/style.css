@@ -310,7 +310,7 @@
   left: 39px;
   top: 40px;
 }
-.sidebar__item {
+.sidebar .linkMyLocation {
   display: flex;
   justify-content: space-between;
   background-image: url(./static/card1.png);
@@ -347,7 +347,7 @@
   text-align: left;
 }
 .sidebar__description {
-  margin-top: 59px;
+  margin-top: 90px;
   font-weight: 400;
   font-size: 21px;
   color: #FFFFFF;

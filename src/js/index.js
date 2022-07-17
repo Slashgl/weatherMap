@@ -1,8 +1,7 @@
 import '../scss/style.scss'
-import {raw} from "file-loader";
-import {data} from "autoprefixer";
 
 const apiKey = `f6c065f36d3bf94559470b07bcf0d80c`
+const myLocationLink = document.querySelector('.linkMyLocation')
 const input = document.querySelector('.input');
 const popupSearch = document.querySelector('.popup__search')
 const popup = document.querySelector('.popup');
@@ -14,18 +13,15 @@ const countries = {};
 let objCountries = {}
 
 function getData(link) {
-  const a = fetch(link)
+  return fetch(link)
     .then(res => res.json())
     .then(res => {
       return res
     })
-  return a
 }
 
 
 function geoFindMe() {
-
-  const myLocationLink = document.querySelector('.linkMyLocation')
 
   async function success(position) {
     const latitude = position.coords.latitude;
@@ -35,15 +31,22 @@ function geoFindMe() {
       name: 'My Location',
       qwery: `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
     }
+
+    const dataMyLocation = await getData(countries.myLocation.qwery)
+    document.querySelector('.coordsMyLocation').innerHTML = `H:${Math.floor(dataMyLocation.lat)}&deg L:${Math.floor(dataMyLocation.lon)}&deg`
+    document.querySelectorAll('.degreesMyLocation').forEach(item => item.innerHTML = `${Math.round(dataMyLocation.current.temp)}&deg`)
+    document.querySelectorAll('.descriptionMyLocation').forEach(item => item.innerHTML = dataMyLocation.current.weather.map(el => el.description.charAt(0).toUpperCase() + el.description.slice(1)))
+    document.querySelector('.city').innerHTML = 'My Location'
     const callback = async (e) => {
       e.preventDefault();
       clearData();
       const data = await getData(countries.myLocation.qwery)
+      document.querySelector('.city').innerHTML = 'My Location'
       render(data)
     }
     myLocationLink.addEventListener('click', callback)
-
     const data = await getData(countries.myLocation.qwery)
+
     render(data)
   }
 
@@ -61,6 +64,11 @@ function geoFindMe() {
 
 geoFindMe()
 
+/*function getTitleCity(className) {
+  for(const [key] of Object.entries(objCountries)) {
+    return document.querySelector(className).innerHTML = key
+  }
+}*/
 
 function render(api) {
 
@@ -69,7 +77,7 @@ function render(api) {
   const ulDayTemp = document.querySelector('.weather__list');
   const ulHourlyTemp = document.querySelector('.weather__frames');
 
-  document.querySelector('.weather__city').innerHTML = countries.country
+
   document.querySelectorAll('.degrees').forEach(item => item.innerHTML = `${Math.round(api.current.temp)}&deg`)
   document.querySelectorAll('.description').forEach(item => item.innerHTML = api.current.weather.map(el => el.description.charAt(0).toUpperCase() + el.description.slice(1)))
   document.querySelector('.weather__time-now').innerHTML = `${translationFromNowToTime(api.current.dt)}`
@@ -81,8 +89,8 @@ function render(api) {
   document.querySelector('.humidity').innerHTML = `${Math.round(api.current.humidity)}%`
   document.querySelector('.visibility').innerHTML = `${api.current.visibility / 1000} км`
 
-  daysTemp.forEach((day, _, arr) => {
-    const listItem = createListDayTemp(day, arr);
+  daysTemp.forEach((day) => {
+    const listItem = createListDayTemp(day);
     ulDayTemp.append(listItem);
   });
   hourlyTemp.forEach(hour => {
@@ -179,6 +187,7 @@ function addingListResult(api) {
     <div class="popup__name">${city.name}</div>
     <div class="popup__country">${city.state}</div>
   `
+
     li.addEventListener('click', function clickedCountry() {
       if (objCountries[city.name]) {
         delete objCountries[city.name]
@@ -231,6 +240,7 @@ async function createCardCityToAside() {
     </div>
     `
     li.addEventListener('click', () => {
+      document.querySelector('.weather__city').innerHTML = key
       clearData()
       render(response)
     })
@@ -270,6 +280,7 @@ function clearData() {
 input.addEventListener('click', () => {
   popup.classList.toggle('active');
   objCountries = {}
+  checked.classList.remove('popup__checked')
 })
 
 popupBtn.addEventListener('click', () => {

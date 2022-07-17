@@ -316,7 +316,7 @@
       top: 40px;
     }
   }
-  &__item {
+  .linkMyLocation {
     display: flex;
     justify-content: space-between;
     background-image: url("../img/card1.png");
@@ -355,7 +355,7 @@
     text-align: left;
   }
   &__description {
-    margin-top: 59px;
+    margin-top: 90px;
     font-weight: 400;
     font-size: 21px;
     color: #FFFFFF;
