@@ -1,2 +1,1 @@
-
-https://weather-map-five.vercel.app/
+https://slashgl.github.io/weatherMap/
