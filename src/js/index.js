@@ -12,6 +12,7 @@ const checked = document.createElement('span');
 
 const countries = {};
 let objCountries = {}
+
 function getData(link) {
   const a = fetch(link)
     .then(res => res.json())
@@ -166,6 +167,7 @@ function getCountry(target) {
       addingListResult(res)
     })
 }
+
 function addingListResult(api) {
   const ul = document.querySelector('.popup__results')
   ul.replaceChildren()
@@ -177,16 +179,15 @@ function addingListResult(api) {
     <div class="popup__name">${city.name}</div>
     <div class="popup__country">${city.state}</div>
   `
-    li.addEventListener('click', function clickedCountry () {
-      if(objCountries[city.name]) {
+    li.addEventListener('click', function clickedCountry() {
+      if (objCountries[city.name]) {
         delete objCountries[city.name]
-      }else {
+      } else {
         objCountries[city.name] = {
           qwery: `https://api.openweathermap.org/data/2.5/onecall?lat=${city.lat}&lon=${city.lon}&appid=${apiKey}&units=metric`,
           data: null
         }
       }
-      console.log(objCountries)
     })
     ul.append(li)
   })
@@ -197,7 +198,7 @@ function addingListResult(api) {
 
 function getCity(tag) {
   tag.forEach((item, i) => {
-    item.addEventListener('click', () =>{
+    item.addEventListener('click', () => {
       checked.classList.toggle('popup__checked');
       item.append(checked)
     })
@@ -205,14 +206,14 @@ function getCity(tag) {
 }
 
 popupBtn.addEventListener('click', () => {
-    createCardCityToAside(objCountries)
+  createCardCityToAside(objCountries)
 })
 
 async function createCardCityToAside() {
 
   const ulCardToAside = document.querySelector('.sidebar__list-city');
 
-  for(const [key, value] of Object.entries(objCountries)) {
+  for (const [key, value] of Object.entries(objCountries)) {
     const response = await getData(value.qwery)
     value.data = response
     const li = document.createElement('li');
