@@ -334,7 +334,14 @@
   &__right {
     margin: 20px;
   }
-  &__subheader {
+  &__localHeader {
+    font-weight: 700;
+    font-size: 32px;
+    color: #FFFFFF;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+  &__subheader{
     font-weight: 700;
     font-size: 32px;
     color: #FFFFFF;

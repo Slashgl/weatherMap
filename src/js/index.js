@@ -1,4 +1,6 @@
 import '../scss/style.scss'
+import {raw} from "file-loader";
+import {data} from "autoprefixer";
 
 const apiKey = `f6c065f36d3bf94559470b07bcf0d80c`
 const input = document.querySelector('.input');
@@ -6,27 +8,42 @@ const popupSearch = document.querySelector('.popup__search')
 const popup = document.querySelector('.popup');
 const popupBtn = document.querySelector('.popup__button');
 const popupToClose = document.querySelector('.popup__close');
+const checked = document.createElement('span');
 
+const countries = {};
+let objCountries = {}
 function getData(link) {
-  fetch(link)
+  const a = fetch(link)
     .then(res => res.json())
     .then(res => {
-      render(res)
+      return res
     })
+  return a
 }
+
 
 function geoFindMe() {
 
   const myLocationLink = document.querySelector('.linkMyLocation')
-  myLocationLink.href = '';
 
-  function success(position) {
+  async function success(position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
-    myLocationLink.href = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+    countries.myLocation = {
+      name: 'My Location',
+      qwery: `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
+    }
+    const callback = async (e) => {
+      e.preventDefault();
+      clearData();
+      const data = await getData(countries.myLocation.qwery)
+      render(data)
+    }
+    myLocationLink.addEventListener('click', callback)
 
-    getData(myLocationLink)
+    const data = await getData(countries.myLocation.qwery)
+    render(data)
   }
 
   function error() {
@@ -45,13 +62,13 @@ geoFindMe()
 
 
 function render(api) {
-  console.log(api)
+
   const daysTemp = getDaysTemp(api.daily);
   const hourlyTemp = getHourlyTemp(api.hourly)
   const ulDayTemp = document.querySelector('.weather__list');
   const ulHourlyTemp = document.querySelector('.weather__frames');
 
-  document.querySelector('.weather__city').innerHTML = api.timezone.split('/').slice(1)
+  document.querySelector('.weather__city').innerHTML = countries.country
   document.querySelectorAll('.degrees').forEach(item => item.innerHTML = `${Math.round(api.current.temp)}&deg`)
   document.querySelectorAll('.description').forEach(item => item.innerHTML = api.current.weather.map(el => el.description.charAt(0).toUpperCase() + el.description.slice(1)))
   document.querySelector('.weather__time-now').innerHTML = `${translationFromNowToTime(api.current.dt)}`
@@ -140,17 +157,19 @@ function createListHourlyTemp(hourly) {
   return li
 }
 
-popupSearch.onkeyup = debounce(({target}) => fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${target.value}&limit=5&appid=${apiKey}`)
-  .then((res) => res.json())
-  .then(res => {
-    console.log(res)
-    addingListResult(res)
-  }), 500)
+popupSearch.onchange = ({target}) => getCountry(target)
 
+function getCountry(target) {
+  fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${target.value}&limit=5&appid=${apiKey}`)
+    .then((res) => res.json())
+    .then(res => {
+      addingListResult(res)
+    })
+}
 function addingListResult(api) {
   const ul = document.querySelector('.popup__results')
   ul.replaceChildren()
-  api.map(city => {
+  api.map((city) => {
     const li = document.createElement('li');
     li.classList.add('popup__item')
     li.style.listStyle = 'none'
@@ -158,67 +177,65 @@ function addingListResult(api) {
     <div class="popup__name">${city.name}</div>
     <div class="popup__country">${city.state}</div>
   `
+    li.addEventListener('click', function clickedCountry () {
+      if(objCountries[city.name]) {
+        delete objCountries[city.name]
+      }else {
+        objCountries[city.name] = {
+          qwery: `https://api.openweathermap.org/data/2.5/onecall?lat=${city.lat}&lon=${city.lon}&appid=${apiKey}&units=metric`,
+          data: null
+        }
+      }
+      console.log(objCountries)
+    })
     ul.append(li)
   })
 
   const ulAll = document.querySelectorAll('.popup__item');
-  getCity(ulAll, api)
+  getCity(ulAll)
 }
 
-function getCity(tag, api) {
+function getCity(tag) {
   tag.forEach((item, i) => {
-    item.addEventListener('click', () => {
-      const checked = document.createElement('span');
-      checked.classList.add('popup__checked');
+    item.addEventListener('click', () =>{
+      checked.classList.toggle('popup__checked');
       item.append(checked)
-      popupBtn.addEventListener('click', () => {
-        api.map((item, index) => {
-          if (i === index) {
-            fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${item.lat}&lon=${item.lon}&appid=${apiKey}&units=metric`)
-              .then(res => res.json())
-              .then(res => {
-                createCardCityToAside(res)
-                return res
-              })
-              .then(res => getCoordsCityFromInput(res))
-          }
-        })
-      })
     })
   })
 }
 
-function getCoordsCityFromInput(api) {
-  const items = document.querySelectorAll('.sidebar__list-city');
-  items.forEach(el => {
-    el.addEventListener('click', () => {
-      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${api.lat}&lon=${api.lon}&appid=${apiKey}&units=metric`)
-        .then(res => res.json())
-        .then(res => {
-          clearData()
-          render(res)
-        })
-    })
-  })
-}
+popupBtn.addEventListener('click', () => {
+    createCardCityToAside(objCountries)
+})
 
-function createCardCityToAside(api) {
+async function createCardCityToAside() {
+
   const ulCardToAside = document.querySelector('.sidebar__list-city');
-  const li = document.createElement('li');
-  li.classList.add('sidebar__item-city')
-  li.style.listStyle = 'none'
-  li.innerHTML = `
-      <div class="sidebar__left">
-        <div class="sidebar__subheader">${api.timezone.split('/').slice(1)}</div>
-        <div class="sidebar__time">${translationFromUnixToTime(api.current.dt)}</div>
-        <div class="sidebar__description">${api.current.weather.map(el => el.description)}</div>
-      </div>
-      <div class="sidebar__right">
-        <div class="sidebar__degrees">${Math.round(api.current.temp)}&deg</div>
-        <div class="sidebar__coordinate">H:${Math.round(api.lat)}&deg L:${Math.round(api.lon)}&deg</div>
-      </div>
+
+  for(const [key, value] of Object.entries(objCountries)) {
+    const response = await getData(value.qwery)
+    value.data = response
+    const li = document.createElement('li');
+    li.classList.add('sidebar__item-city')
+    li.style.listStyle = 'none'
+    li.innerHTML = `
+    <div class="sidebar__left">
+        <div class="weather__city">${key}</div>
+        <div class="sidebar__time">${translationFromUnixToTime(response.current.dt)}</div>
+        <div class="sidebar__description">${response.current.weather.map(el => el.description)}</div>
+    </div>
+        <div class="sidebar__right">
+        <div class="sidebar__degrees">${Math.round(response.current.temp)}&deg</div>
+        <div class="sidebar__coordinate">H:${Math.round(response.lat)}&deg L:${Math.round(response.lon)}&deg</div>
+    </div>
     `
-  ulCardToAside.append(li)
+    li.addEventListener('click', () => {
+      clearData()
+      render(response)
+    })
+    ulCardToAside.append(li)
+  }
+
 }
 
 function translationFromUnixToTime(timestamp) {
@@ -249,20 +266,9 @@ function clearData() {
   document.querySelectorAll('.weather__list').forEach(el => el.innerHTML = '')
 }
 
-function debounce(f, ms) {
-  let isCooldown = false;
-  return function () {
-    if (isCooldown) return;
-    f.apply(this, arguments);
-
-    isCooldown = true;
-    setTimeout(() => (isCooldown = false), ms)
-  };
-}
-
-
 input.addEventListener('click', () => {
   popup.classList.toggle('active');
+  objCountries = {}
 })
 
 popupBtn.addEventListener('click', () => {
@@ -273,10 +279,5 @@ popupToClose.addEventListener('click', () => {
   popup.classList.remove('active');
 })
 
-document.querySelector('.linkMyLocation').addEventListener('click', (e) => {
-  e.preventDefault()
-  clearData()
-  geoFindMe()
-})
 
 
