@@ -64,12 +64,6 @@ function geoFindMe() {
 
 geoFindMe()
 
-/*function getTitleCity(className) {
-  for(const [key] of Object.entries(objCountries)) {
-    return document.querySelector(className).innerHTML = key
-  }
-}*/
-
 function render(api) {
 
   const daysTemp = getDaysTemp(api.daily);
