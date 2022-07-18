@@ -7,7 +7,6 @@ const popupSearch = document.querySelector('.popup__search')
 const popup = document.querySelector('.popup');
 const popupBtn = document.querySelector('.popup__button');
 const popupToClose = document.querySelector('.popup__close');
-const checked = document.querySelector('.checked')
 
 const countries = {};
 let objCountries = {}
