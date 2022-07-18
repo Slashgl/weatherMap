@@ -7,7 +7,7 @@ const popupSearch = document.querySelector('.popup__search')
 const popup = document.querySelector('.popup');
 const popupBtn = document.querySelector('.popup__button');
 const popupToClose = document.querySelector('.popup__close');
-const checked = document.createElement('span');
+const checked = document.querySelector('.checked')
 
 const countries = {};
 let objCountries = {}
@@ -178,11 +178,16 @@ function addingListResult(api) {
     li.classList.add('popup__item')
     li.style.listStyle = 'none'
     li.innerHTML = `
-    <div class="popup__name">${city.name}</div>
-    <div class="popup__country">${city.state}</div>
+    <div class="popup__wrapper">
+        <div class="popup__name">${city.name}</div>
+        <div class="popup__country">${city.state}</div>
+    </div>
   `
-
+    const divChecked = document.createElement('div');
     li.addEventListener('click', function clickedCountry() {
+
+      divChecked.classList.toggle('checked')
+
       if (objCountries[city.name]) {
         delete objCountries[city.name]
       } else {
@@ -191,20 +196,13 @@ function addingListResult(api) {
           data: null
         }
       }
+      console.log(objCountries)
     })
+    input.addEventListener('click', () => {
+      divChecked.classList.remove('checked')
+    })
+    li.append(divChecked)
     ul.append(li)
-  })
-
-  const ulAll = document.querySelectorAll('.popup__item');
-  getCity(ulAll)
-}
-
-function getCity(tag) {
-  tag.forEach((item, i) => {
-    item.addEventListener('click', () => {
-      checked.classList.toggle('popup__checked');
-      item.append(checked)
-    })
   })
 }
 
@@ -273,8 +271,7 @@ function clearData() {
 
 input.addEventListener('click', () => {
   popup.classList.toggle('active');
-  objCountries = {}
-  checked.classList.remove('popup__checked')
+  objCountries = {};
 })
 
 popupBtn.addEventListener('click', () => {
