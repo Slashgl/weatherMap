@@ -327,6 +327,9 @@
     text-decoration: none;
 
   }
+  .coordsMyLocation {
+    margin-top: 25px;
+  }
   &__left {
     margin: 20px;
 
@@ -355,7 +358,7 @@
     text-align: left;
   }
   &__description {
-    margin-top: 90px;
+    margin-top: 70px;
     font-weight: 400;
     font-size: 21px;
     color: #FFFFFF;
@@ -368,6 +371,7 @@
     color: #FFFFFF;
   }
   &__coordinate {
+    margin-top: 7px;
     font-weight: 500;
     font-size: 21px;
     color: #FFFFFF;
