@@ -99,8 +99,6 @@ function render(api) {
     const listItem = createListHourlyTemp(hour)
     ulHourlyTemp.append(listItem)
   })
-
-
 }
 
 const getDayOfTheWeek = timestamp => {
@@ -245,7 +243,6 @@ async function createCardCityToAside() {
     })
     ulCardToAside.append(li)
   }
-
 }
 
 function translationFromUnixToTime(timestamp) {
