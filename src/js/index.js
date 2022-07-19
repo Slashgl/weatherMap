@@ -19,7 +19,6 @@ function getData(link) {
     })
 }
 
-
 function geoFindMe() {
 
   async function success(position) {
@@ -32,15 +31,25 @@ function geoFindMe() {
     }
 
     const dataMyLocation = await getData(countries.myLocation.qwery)
+
+    fetch('https://json.geoiplookup.io/')
+      .then(res => res.json())
+      .then(res => {
+        document.querySelectorAll('.weather__city').forEach(city => city.innerHTML = res.city)
+        myLocationLink.addEventListener('click', () => {
+          document.querySelector('.weather__city').innerHTML = res.city
+        })
+      })
+
     document.querySelector('.coordsMyLocation').innerHTML = `H:${Math.floor(dataMyLocation.lat)}&deg L:${Math.floor(dataMyLocation.lon)}&deg`
     document.querySelectorAll('.degreesMyLocation').forEach(item => item.innerHTML = `${Math.round(dataMyLocation.current.temp)}&deg`)
     document.querySelectorAll('.descriptionMyLocation').forEach(item => item.innerHTML = dataMyLocation.current.weather.map(el => el.description.charAt(0).toUpperCase() + el.description.slice(1)))
     document.querySelector('.city').innerHTML = 'My Location'
+    console.log(dataMyLocation)
     const callback = async (e) => {
       e.preventDefault();
       clearData();
       const data = await getData(countries.myLocation.qwery)
-      document.querySelector('.city').innerHTML = 'My Location'
       render(data)
     }
     myLocationLink.addEventListener('click', callback)
