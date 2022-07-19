@@ -320,6 +320,9 @@
   border: none;
   text-decoration: none;
 }
+.sidebar .coordsMyLocation {
+  margin-top: 25px;
+}
 .sidebar__left {
   margin: 20px;
 }
@@ -347,7 +350,7 @@
   text-align: left;
 }
 .sidebar__description {
-  margin-top: 90px;
+  margin-top: 70px;
   font-weight: 400;
   font-size: 21px;
   color: #FFFFFF;
@@ -360,6 +363,7 @@
   color: #FFFFFF;
 }
 .sidebar__coordinate {
+  margin-top: 7px;
   font-weight: 500;
   font-size: 21px;
   color: #FFFFFF;
@@ -440,6 +444,7 @@
   left: 18px;
 }
 .popup__results {
+  position: relative;
   width: 100%;
   height: 100%;
   background: #FFFFFF;
@@ -448,6 +453,8 @@
 }
 .popup__item {
   position: relative;
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 16px;
   cursor: pointer;
 }
@@ -455,6 +462,7 @@
   content: "";
   position: absolute;
   width: 589px;
+  margin-top: 40px;
   height: 0;
   border: 1px solid rgba(84, 84, 88, 0.65);
 }
@@ -480,11 +488,9 @@
 .popup__button:hover {
   background: #3AA9FF;
 }
-.popup__checked {
+.popup .checked {
   content: url(./static/Vectorchecked.svg);
-  position: absolute;
-  right: 0;
-  top: 10px;
+  margin-left: auto;
 }
 
 .active {
