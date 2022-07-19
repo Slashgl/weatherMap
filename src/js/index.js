@@ -79,7 +79,6 @@ function render(api) {
   const ulDayTemp = document.querySelector('.weather__list');
   const ulHourlyTemp = document.querySelector('.weather__frames');
 
-
   document.querySelectorAll('.degrees').forEach(item => item.innerHTML = `${Math.round(api.current.temp)}&deg`)
   document.querySelectorAll('.description').forEach(item => item.innerHTML = api.current.weather.map(el => el.description.charAt(0).toUpperCase() + el.description.slice(1)))
   document.querySelector('.weather__time-now').innerHTML = `${translationFromNowToTime(api.current.dt)}`
